@@ -1,0 +1,17 @@
+producer_add_product:
+    path: /{_locale}/producer
+    controller: App\Controller\ProducerController::add_product
+    requirements: 
+        _locale: en|fr|lu
+
+producer_show_products:
+    path: /{_locale}/producer/{name}/{description}
+    controller: App\Controller\ProducerController::show_products
+    requirements: 
+        _locale: en|fr|lu
+
+member_products:
+    path: /{_locale}/member
+    controller: App\Controller\MemberController::week
+    requirements: 
+        _locale: en|fr|lu

@@ -1,3 +1,15 @@
-<h3>This is the new product added:</h3>
-<h1>{{name}}</h1>
-<h3>{{description}}</h3>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Local Veggies!</title>
+    </head>
+    <body>
+        <h1>List of products</h1>
+
+        <ul id="navigation">
+            {% for product in products %}
+                <li>{{ product.name }}: {{ product.price }} euros</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

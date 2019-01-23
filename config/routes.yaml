@@ -5,8 +5,14 @@ producer_add_product:
         _locale: en|fr|lu
 
 producer_show_products:
-    path: /{_locale}/producer/{name}/{description}
+    path: /{_locale}/producer/show
     controller: App\Controller\ProducerController::show_products
+    requirements: 
+        _locale: en|fr|lu
+
+producer_create_products:
+    path: /{_locale}/producer/create
+    controller: App\Controller\ProducerController::create_product
     requirements: 
         _locale: en|fr|lu
 

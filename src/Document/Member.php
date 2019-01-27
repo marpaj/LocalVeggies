@@ -15,17 +15,17 @@ class Member
     private $id;
 
     /**
-     * @MongoDB\Field(type="string", length=50)
+     * @MongoDB\Field(type="string")
      */
     private $name;
 
     /**
-     * @MongoDB\Field(type="string", length=50)
+     * @MongoDB\Field(type="string")
      */
     private $lastname;
 
     /**
-     * @MongoDB\Field(type="string", length=50, nullable=true)
+     * @MongoDB\Field(type="string")
      */
     private $phone;
 

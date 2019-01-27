@@ -3,47 +3,21 @@
 namespace App\Controller;
 
 use App\Document\Product;
+use App\Form\ProductType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\NotBlank;
+
+use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ODM\MongoDB\DocumentManager as DocumentManager;
 
 
 class ProducerController extends AbstractController
 {
-    public function add_product(Request $request, DocumentManager $dm)
-    {
-        $form = $this->createFormBuilder()
-            ->add('name', TextType::class, array(
-                'constraints' => new NotBlank(),
-            ))
-            ->add('price', TextType::class, array(
-                'constraints' => new NotBlank(),
-            ))
-            ->getForm();
-        
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            $product = new Product();
-            $product->setName($data['name']);
-            $product->setPrice($data['price']);
-
-            $dm->persist($product);
-            $dm->flush();
-
-            return $this->redirectToRoute('producer_show_products');
-        }
-
-        return $this->render('producer/addProduct.html.twig', array('form' => $form->createView(), ));
-    }
-
-    public function show_products(DocumentManager $dm)
+    public function show_products(Request $request, DocumentManager $dm)
     {
         $repository = $dm->getRepository(Product::class);
         $products = $repository->findAll();
@@ -51,27 +25,44 @@ class ProducerController extends AbstractController
         return $this->render('producer/showProducts.html.twig', ['products' => $products]);
     }
 
-    public function show_new_product(DocumentManager $dm)
-    {   
-        $repository = $dm->getRepository(Product::class);
-        $product = $repository->findById('5c42fb16d40d882d70005a81');
+    public function add_product(Request $request, DocumentManager $dm)
+    {
+        $form = $this->createForm(ProductType::class);
+        $form->handleRequest($request);
 
-        if (!$product) {
-            throw $this->createNotFoundException('No product found for id 5c42fb16d40d882d70005a81');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $product = $form->getData();
+
+            $dm->persist($product);
+            $dm->flush();
+
+            return $this->redirectToRoute('producer_show_products');
         }
 
-        return $this->render('producer/showProducts.html.twig', ['name' => $product['name'], 'price' => $product->getPrice()]);
+        return $this->render( 'producer/addProduct.html.twig', ['form' => $form->createView()] );
     }
 
-    public function create_product(DocumentManager $dm)
-    {
-        $product = new Product();
-        $product->setName('A Foo Bar');
-        $product->setPrice('19.99');
+     /**
+     * @Route(
+     *      "/{_locale}/producer/product/edit/{product}", 
+     *      name="producer_edit_product",
+     *      requirements = { "_locale": "en|fr|lu"}
+     * )
+     */
+    public function edit_product(Request $request, DocumentManager $dm, Product $id)
+    {   
+        $product = $dm->getRepository(Product::class)->find($id);
 
-        $dm->persist($product);
-        $dm->flush();
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
 
-        return new Response('Created product id '.$product->getId());
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $dm->flush();
+
+            return $this->redirectToRoute('producer_show_products');
+        }
+        
+        return $this->render('producer/editProduct.html.twig', ['form' => $form->createView()] );
     }
 }

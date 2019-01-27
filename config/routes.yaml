@@ -1,23 +1,19 @@
+producer_show_products:
+    path: /{_locale}/producer/product
+    controller: App\Controller\ProducerController::show_products
+    requirements: 
+        _locale: en|fr|lu
+        
 producer_add_product:
-    path: /{_locale}/producer
+    path: /{_locale}/producer/product/add
     controller: App\Controller\ProducerController::add_product
     requirements: 
         _locale: en|fr|lu
 
-producer_show_products:
-    path: /{_locale}/producer/show
-    controller: App\Controller\ProducerController::show_products
-    requirements: 
-        _locale: en|fr|lu
 
-producer_create_products:
-    path: /{_locale}/producer/create
-    controller: App\Controller\ProducerController::create_product
-    requirements: 
-        _locale: en|fr|lu
 
-member_products:
-    path: /{_locale}/member
-    controller: App\Controller\MemberController::week
+producer_delete_products:
+    path: /{_locale}/producer/product/delete
+    controller: App\Controller\ProducerController::delete_product
     requirements: 
         _locale: en|fr|lu

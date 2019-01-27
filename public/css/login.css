@@ -1,0 +1,11 @@
+.form-signing {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.form-signing .checkbox {
+    font-weight: 400;
+}

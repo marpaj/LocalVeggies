@@ -17,3 +17,7 @@ producer_delete_products:
     controller: App\Controller\ProducerController::delete_product
     requirements: 
         _locale: en|fr|lu
+
+app_logout:
+    path: /logout
+    

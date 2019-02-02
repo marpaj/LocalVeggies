@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+    
+    <a class="navbar-brand" href="{{ path('app_home') }}">Local Veggies</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        
+        
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="navbar-link" href="{{ path('list_products') }}">Products <span class="sr-only">(current)</span></a>
+            </li>
+
+            {% if is_granted('ROLE_PRODUCER') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('list_producer_orders') }}">Orders</a>
+            </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_MEMBER') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('list_member_orders') }}">Orders</a>
+            </li>
+            {% endif %}
+        </ul>
+
+        <ul class="nav navbar-nav">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li>
+                <p class="navbar-brand">{{ app.user.email }}</p>
+            </li>
+            <li>
+                <a class="navbar-brand" href="{{ path('app_logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a>
+            </li>
+            
+            {% elseif not is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li>
+                <a class="navbar-brand" href="{{ path('app_login') }}">Login</a>
+            </li>
+            {% endif %}
+            
+        </ul>
+    </div>
+                
+</nav>

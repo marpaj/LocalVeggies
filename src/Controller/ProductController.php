@@ -8,11 +8,12 @@ use App\Form\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/product", name="list_product")
+     * @Route("/product", name="list_products")
      */
     public function index()
     {
@@ -25,7 +26,8 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/create", name="create_product")
+     * @Route("/producer/product/create", name="create_product")
+     * @IsGranted("ROLE_PRODUCER")
      */
     public function create(Request $request)
     {
@@ -47,12 +49,10 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route(
-     *      "/product/edit/{product}", 
-     *      name="edit_product"
-     * )
+     * @Route("/producer/product/edit/{product}", name="edit_product")
+     * @IsGranted("ROLE_PRODUCER")
      */
-    public function edit_product(Request $request, Product $product)
+    public function edit(Request $request, product $product)
     {   
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -66,5 +66,22 @@ class ProductController extends AbstractController
         }
         
         return $this->render('product/edit.html.twig', ['form' => $form->createView()] );
+    }
+
+    /**
+     * @Route("/producer/product/delete/{product}", name="delete_product")
+     * @IsGranted("ROLE_PRODUCER")
+     */
+    public function delete(Request $request, Product $product)
+    {
+        if($product === null) {
+            return $this->redirectToRoute('list_product');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+        
+        return $this->redirectToRoute('list_product');
     }
 }

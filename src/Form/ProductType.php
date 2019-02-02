@@ -17,7 +17,8 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['constraints' => new NotBlank()] )
-            ->add('price', TextType::class, ['constraints' => new NotBlank()] )
+            ->add('category', TextType::class)
+            ->add('description', TextType::class)
             ->add('save', SubmitType::class)
         ;
     }

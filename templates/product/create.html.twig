@@ -1,29 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vegetables!{% endblock %}
+{% block title %}Create Product{% endblock %}
 
 {% block body %}
 <form method="post">
 
-    <h1 class="h3 mb-3 font-weight-normal">Please add a new Vegetable</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Please insert a new Product</h1>
+
+    {# <div class="form-group">
+        <label for="distributionDate">Distribution Date: </label>
+        <select class="form-control" id="distributionDate">
+            {% for distribution in distribution_service.getNextsDistributions() %}
+            <option>{{ distribution }}</option>
+            {% endfor %}
+        </select>
+    </div> #}
 
     <div class="form-group">
-        <label for="inputName" class="sr-only">Name</label>
+        <label for="inputName">Name</label>
         <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required autofocus>
     </div>
 
     <div class="form-group">
-        <label for="inputCategory" class="sr-only">Category</label>
+        <label for="inputCategory">Category</label>
         <input type="text" name="category" id="inputCategory" class="form-control" placeholder="Category" autofocus>
     </div>
 
     <div class="form-group">
-        <label for="inputDescription" class="sr-only">Description</label>
+        <label for="inputDescription">Description</label>
         <input type="text" name="description" id="inputDescription" class="form-control" placeholder="Description" autofocus>
     </div>
 
     <div class="form-group">
-        <label for="inputPrice" class="sr-only">Price</label>
+        <label for="inputPrice">Price</label>
         <input type="text" name="price" id="inputPrice" class="form-control" placeholder="Price" autofocus>
     </div>
 

@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -22,12 +25,6 @@ class Product
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Producer")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $producer;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $category;
@@ -36,11 +33,6 @@ class Product
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $week;
 
     /**
      * @ORM\Column(type="float")
@@ -88,18 +80,6 @@ class Product
         return $this;
     }
 
-    public function getWeek(): ?int
-    {
-        return $this->week;
-    }
-
-    public function setWeek(int $week): self
-    {
-        $this->week = $week;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -112,15 +92,16 @@ class Product
         return $this;
     }
 
-    public function getProducer(): ?Producer
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return $this->producer;
-    }
+        $metadata->addPropertyConstraint('name', new NotBlank());
+        $metadata->addPropertyConstraint('category', new NotBlank());
+        $metadata->addPropertyConstraint('price', new NotBlank());
 
-    public function setProducer(?Producer $producer): self
-    {
-        $this->producer = $producer;
-
-        return $this;
+        /* $metadata->addPropertyConstraint('distributionDate', new NotBlank());
+        $metadata->addPropertyConstraint(
+            'distributionDate',
+            new Type(\DateTime::class)
+        ); */
     }
 }

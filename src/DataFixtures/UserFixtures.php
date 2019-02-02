@@ -4,8 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -34,13 +33,5 @@ class UserFixtures extends Fixture
         $manager->persist($userProducer);
 
         $manager->flush();
-
-        $this->addReference('admin-user', $userAdmin);
-        $this->addReference('producer-user', $userProducer);
-    }
-
-    public function getOrder()
-    {
-        return 1; // the order in which fixtures will be loaded
     }
 }

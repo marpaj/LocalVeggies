@@ -17,12 +17,6 @@ class Producer
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $name;
@@ -51,6 +45,12 @@ class Producer
      * @ORM\Column(type="string", length=255)
      */
     private $country;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {

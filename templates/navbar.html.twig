@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="navbar-link" href="{{ path('list_products') }}">Products <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ path('list_products') }}">Products <span class="sr-only">(current)</span></a>
             </li>
 
             {% if is_granted('ROLE_PRODUCER') %}
@@ -31,7 +31,7 @@
                 <p class="navbar-brand">{{ app.user.email }}</p>
             </li>
             <li>
-                <a class="navbar-brand" href="{{ path('app_logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a>
+                <a class="nav-link" href="{{ path('app_logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Logout</a>
             </li>
             
             {% elseif not is_granted('IS_AUTHENTICATED_FULLY') %}

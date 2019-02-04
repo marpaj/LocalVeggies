@@ -17,12 +17,6 @@ class Member
      * @ORM\Column(type="integer")
      */
     private $id;
-    
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
 
     /**
      * @ORM\Column(type="text")
@@ -63,6 +57,12 @@ class Member
      * @ORM\OneToMany(targetEntity="App\Entity\Orders", mappedBy="member")
      */
     private $orders;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -185,6 +185,18 @@ class Member
                 $order->setMember(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -15,10 +15,15 @@ class ProductController extends AbstractController
     /**
      * @Route("/product", name="list_products")
      */
-    public function index()
+    public function index(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
-        $products = $repository->findAll();
+
+        if($request->query->get('distributionDateStr') === null) {
+            $products = $repository->findAll();
+        } else {
+            $products = $repository->findByDistributionDate($request->query->get('distributionDateStr'));
+        }
 
         return $this->render('product/list.html.twig', [
             'products' => $products
@@ -32,6 +37,7 @@ class ProductController extends AbstractController
     public function create(Request $request)
     {
         $form = $this->createForm(ProductType::class);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,7 +48,7 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('list_product');
+            return $this->redirectToRoute('list_products');
         }
 
         return $this->render( 'product/create.html.twig', ['form' => $form->createView()] );
@@ -52,7 +58,7 @@ class ProductController extends AbstractController
      * @Route("/producer/product/edit/{product}", name="edit_product")
      * @IsGranted("ROLE_PRODUCER")
      */
-    public function edit(Request $request, product $product)
+    public function edit(Request $request, Product $product)
     {   
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -62,7 +68,7 @@ class ProductController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            return $this->redirectToRoute('list_product');
+            return $this->redirectToRoute('list_products');
         }
         
         return $this->render('product/edit.html.twig', ['form' => $form->createView()] );
@@ -75,13 +81,13 @@ class ProductController extends AbstractController
     public function delete(Request $request, Product $product)
     {
         if($product === null) {
-            return $this->redirectToRoute('list_product');
+            return $this->redirectToRoute('list_products');
         }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);
         $em->flush();
         
-        return $this->redirectToRoute('list_product');
+        return $this->redirectToRoute('list_products');
     }
 }

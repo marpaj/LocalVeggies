@@ -85,7 +85,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         //Redirection after login success
-        return new RedirectResponse($this->router->generate('product'));
+        return new RedirectResponse($this->router->generate('list_products'));
     }
 
     protected function getLoginUrl()

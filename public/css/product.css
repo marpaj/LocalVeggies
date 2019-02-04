@@ -1,0 +1,52 @@
+.containerExtraMember {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .itemExtraMember {
+    width: 230px;
+    margin: 5px;
+    border: 1px solid #995533;
+    border-radius: 3px;
+  }
+  
+  .itemExtraMember .heading{
+    padding: 7px;
+    text-align: center;
+    color: #995533;
+    background-color: #f2cda6; 
+  }
+  
+  .itemExtraMember .price{
+    text-align: right;
+    padding: 7px;
+  }
+  
+  .itemExtraMember .description{
+    padding: 7px;
+  }
+  
+  .itemExtraMember .total{
+    padding: 7px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f9e6d2;
+  }
+  
+  .itemExtraMember .footer{
+    padding: 7px;
+    bottom: 0;
+    background-color: #f9e6d2;
+    text-align: center;
+  }
+  
+  .itemExtraMember .footer .quantity{
+    padding: 0px 15px;
+    background-color: none;
+  }
+  
+  .itemExtraMember .footer .total{
+    background-color: none;
+    text-align: right;
+  }

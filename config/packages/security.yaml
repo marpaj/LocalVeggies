@@ -16,9 +16,11 @@ security:
             security: false
         main:
             anonymous: true
+            form_login:
+                default_target_path: list_products
             logout:
                 path: app_logout
-                target: list_product
+                target: app_home
 
             guard:
                 authenticators:

@@ -6,12 +6,15 @@ class DistributionService
 {
     public function getNextsDistributions()
     {
-        $nextDistributionDateStr = strtotime("next Saturday");
-        $nextDistributionDate = date("d M Y", $nextDistributionDateStr);
+        $nextDistributionDateTime = strtotime("next Saturday");
+        $nextDistributionDateStr = date("l d M Y", $nextDistributionDateTime);
 
-        $secondNextDistributionDateStr = strtotime("+1 weeks", $nextDistributionDateStr);
-        $secondNextDistributionDate = date("d M Y", $secondNextDistributionDateStr);
+        $secondNextDistributionDatetime = strtotime("+1 weeks", $nextDistributionDateTime);
+        $secondNextDistributionDateStr = date("l d M Y", $secondNextDistributionDatetime);
 
-        return [$nextDistributionDate, $secondNextDistributionDate];
+        return [
+            $nextDistributionDateStr => $nextDistributionDateTime, 
+            $secondNextDistributionDateStr => $secondNextDistributionDatetime
+        ];
     }
 }

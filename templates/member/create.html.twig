@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Product{% endblock %}
+{% block title %}Create Member{% endblock %}
 
 {% block body %}
     {{ form_start(form) }}
-        {{ form_row(form.distributionDate) }}
+        {{ form_row(form.user) }}
 
         {{ form_widget(form) }}
     {{ form_end(form) }}
+
 {% endblock %}

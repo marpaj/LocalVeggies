@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
+//use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -20,7 +20,7 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $name;
 
@@ -38,6 +38,11 @@ class Product
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $distributionDate;
 
     public function getId(): ?int
     {
@@ -92,16 +97,28 @@ class Product
         return $this;
     }
 
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    public function getDistributionDate(): ?\DateTimeInterface
+    {
+        return $this->distributionDate;
+    }
+
+    public function setDistributionDate(\DateTimeInterface $distributionDate): self
+    {
+        $this->distributionDate = $distributionDate;
+
+        return $this;
+    }
+
+    /* public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('name', new NotBlank());
         $metadata->addPropertyConstraint('category', new NotBlank());
         $metadata->addPropertyConstraint('price', new NotBlank());
 
-        /* $metadata->addPropertyConstraint('distributionDate', new NotBlank());
+        $metadata->addPropertyConstraint('distributionDate', new NotBlank());
         $metadata->addPropertyConstraint(
             'distributionDate',
             new Type(\DateTime::class)
-        ); */
-    }
+        );
+    } */
 }

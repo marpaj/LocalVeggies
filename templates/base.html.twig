@@ -22,6 +22,17 @@
     <body>
         {% embed "navbar.html.twig" %}{% endembed %}
 
+        <header class="bgImage" id="banner">
+        <div class="container">
+            <h1>Local Veggies</h1>
+            <p class="lead"><b>...from producers next to you!</b></p>
+            {# <p class="lead"><b>
+            {{'main_slogan_1' | tr}}<br/>
+            {{'main_slogan_2' | tr}}</b>
+            </p> #}
+        </div>
+        </header>
+
         <div class="container-fluid">
             {% block body %}{% endblock %}
         </div>

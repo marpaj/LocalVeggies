@@ -22,19 +22,23 @@ class ProductRepository extends ServiceEntityRepository
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findByDistributionDate($distributionDateStr)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $dateTime = date_create($distributionDateStr);
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Product p
+            WHERE p.distributionDate = :distribution
+            ORDER BY p.name ASC'
+        )->setParameter('distribution', $dateTime);
+
+        // returns an array of Product objects
+        return $query->execute();
     }
-    */
+   
 
     /*
     public function findOneBySomeField($value): ?Product
@@ -42,6 +46,7 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
             ->setParameter('val', $value)
+            ->setMaxResults(10)
             ->getQuery()
             ->getOneOrNullResult()
         ;

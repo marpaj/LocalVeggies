@@ -69,6 +69,9 @@
         
         <div class="itemExtraMember">
             <div class="">
+                <div class="images">
+                    <img src="{{ asset('images/tomatoes.jpg') }}" />
+                </div>
                 <div class="heading">
                     <b>{{product.name}}</b>
                 </div>
@@ -78,6 +81,12 @@
                 <div class="price">
                     <span class='glyphicon glyphicon-euro'></span> {{product.price}}
                 </div>
+
+                {% if is_granted('ROLE_PRODUCER') %}
+                <div class="footer">
+                    <input type="number" name="quantity" value="0" size="5" />
+                </div>
+                {% endif %}
                 {# <div class="footer">
                     <button type="button" class="btn btn-default" ng-click="$ctrl.minusExtra(extra)" ng-disabled="$ctrl.basket.enable">
                         <span class='glyphicon glyphicon-minus'></span>

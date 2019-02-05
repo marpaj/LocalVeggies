@@ -1,28 +1,7 @@
-.bgImage {
-    position: relative;
-    width: 100%;
-    color: white;
+.explanation {
     text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);  
-    font-weight: bold;
-    vertical-align: middle;
-}
-
-.bgImage::before {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(rgba(0, 255, 0, 0.3), rgba(0, 255, 0, 0.3)), url("/images/veggies_home.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.8;
-    z-index: -1;
-}
-  
-.bgImage img{
-    max-width: 50%;
-    margin-top: 20px;
+    border-top: 10px;
+    border-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }

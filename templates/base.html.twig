@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         
         {% block head_css %}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{{ asset('css/base.css')}}">
         {% endblock %}
 
         {% block head_js %}
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-        <!-- Popper JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+        
         {% endblock %}
     </head>
+
     <body>
-        {% embed "navbar.html.twig" %}{% endembed %}
+        {% include "navbar.html.twig" %}
 
         <header class="bgImage" id="banner">
-        <div class="container">
-            <h1>Local Veggies</h1>
-            <p class="lead"><b>...from producers next to you!</b></p>
-            {# <p class="lead"><b>
-            {{'main_slogan_1' | tr}}<br/>
-            {{'main_slogan_2' | tr}}</b>
-            </p> #}
-        </div>
+            <div class="container">
+                
+                <div class="titleContainer">
+                    <h1>Local<br/>Veggies</h1>
+                    <p class="lead"><b>...from producers next to you!</b></p>
+                    {# <p class="lead"><b>
+                    {{'main_slogan_1' | tr}}<br/>
+                    {{'main_slogan_2' | tr}}</b>
+                    </p> #}
+                </div>
+            </div>
         </header>
 
-        <div class="container-fluid">
+        {# Reading flash messages #}
+        {% for label, messages in app.flashes %}
+            <div class="explanation flash-messages">
+            {% for message in messages %}
+                {# <div class="flash-{{ label }}"> #}
+                    {{ message }}
+                {# </div> #}
+            {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="container">
             {% block body %}{% endblock %}
         </div>
         
         {% block javascripts %}
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+            <!-- Popper JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
         {% endblock %}
     </body>
+    
 </html>

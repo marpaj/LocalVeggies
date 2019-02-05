@@ -2,26 +2,28 @@
 
 {% block title %}Home{% endblock %}
 
+{% block head_css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/home.css')}}">
+{% endblock %}
+
 {% block body %}
-
 <div class="container">
-<h1>Welcome to Local Veggies</h1>
-
-    {# Reading flash messages #}
-    {% for message in app.flashes('message') %}
-        <div class="flash-notice">
-            {{ message }}
-        </div>
-    {% endfor %}
 
     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-    <p>
+    <div class="explanation">
+    
+        Lorem ipsum dolor sit amet, te audiam nostrum eos, ad dolorum interpretaris sed, duo dicta meliore in. An ius ipsum atqui, atomorum maluisset constituto id eum, ea pro ceteros propriae scripserit. Dolor fastidii ut vel. Veri facilis conclusionemque eu sea, vix stet viris scaevola id. Qui debet corpora nominati id, nec ei fugit dolor nullam.
+        <br/><br/>
         <a href="{{ path('create_producer') }}" class="btn btn-primary" role="button">Join as a PRODUCER</a>    
-    </p>
+    
+    </div>
 
-    <p>
-        <a href="{{ path('create_member') }}" class="btn btn-primary" role="button">Join as a MEMBER</a>    
-    </p>
+    <div class="explanation">
+        Lorem ipsum dolor sit amet, te audiam nostrum eos, ad dolorum interpretaris sed, duo dicta meliore in. An ius ipsum atqui, atomorum maluisset constituto id eum, ea pro ceteros propriae scripserit. Dolor fastidii ut vel. Veri facilis conclusionemque eu sea, vix stet viris scaevola id. Qui debet corpora nominati id, nec ei fugit dolor nullam.
+        <br/><br/>
+        <a href="{{ path('create_member') }}" class="btn btn-primary" role="button">Join as a MEMBER</a>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

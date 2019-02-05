@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+<nav class="navbar navbar-expand-lg navbar-inverse navbar-light bg-light navbar-static-top bg-transparent">
     
     <a class="navbar-brand" href="{{ path('app_home') }}">Local Veggies</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,13 @@
             
             {% elseif not is_granted('IS_AUTHENTICATED_FULLY') %}
             <li>
-                <a class="navbar-brand" href="{{ path('app_login') }}">Login</a>
+                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ path('create_producer') }}">Producer sign up</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ path('create_member') }}">Member sign up</a>
             </li>
             {% endif %}
             

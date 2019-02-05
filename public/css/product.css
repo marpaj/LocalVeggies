@@ -5,12 +5,23 @@
   }
   
   .itemExtraMember {
-    width: 230px;
+    width: 260px;
     margin: 5px;
     border: 1px solid #995533;
     border-radius: 3px;
   }
   
+  .itemExtraMember images{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .itemExtraMember .heading{
     padding: 7px;
     text-align: center;
